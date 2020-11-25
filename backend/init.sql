@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users(
     "firstName" VARCHAR(30) NOT NULL,
     "lastName" VARCHAR(30) NOT NULL,
     password VARCHAR(500) NOT NULL,
-    role USER_ROLE NOT NULL DEFAULT 'customer'
+    role USER_ROLE NOT NULL DEFAULT 'customer',
+    "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS games(
@@ -20,13 +21,15 @@ CREATE TABLE IF NOT EXISTS games(
     price NUMERIC NOT NULL,
     device DEVICE NOT NULL,
     platform PLATFORM,
-    poster TEXT
+    poster TEXT,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS keys(
     id SERIAL PRIMARY KEY NOT NULL,
     key VARCHAR(255) UNIQUE NOT NULL,
-    game VARCHAR(25) NOT NULL REFERENCES games(id)
+    game VARCHAR(25) NOT NULL REFERENCES games(id),
+    "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS orders(
@@ -35,7 +38,8 @@ CREATE TABLE IF NOT EXISTS orders(
     "madeBy" INTEGER NOT NULL REFERENCES users(id),
     game VARCHAR(25) NOT NULL REFERENCES games(id),
     amount NUMERIC NOT NULL,
-    key INTEGER NOT NULL REFERENCES keys(id)
+    key INTEGER NOT NULL REFERENCES keys(id),
+    "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS "session" (

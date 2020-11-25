@@ -29,6 +29,7 @@ export const permissions = shield({
     checkout: isAuthenticated,
     addGame: or(isAdmin, isModerator),
     createUser: not(isAuthenticated),
-    login: not(isAuthenticated)
+    login: not(isAuthenticated),
+    updateRole: isAdmin
   }
 })

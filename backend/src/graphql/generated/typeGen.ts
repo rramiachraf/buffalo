@@ -4,9 +4,17 @@
  */
 
 import * as ContextModule from "../../types"
-
-
-
+import { core } from "@nexus/schema"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.ScalarInputFieldConfig<core.GetGen3<"inputTypes", TypeName, FieldName>>): void // "Date";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
+  }
+}
 
 
 declare global {
@@ -19,6 +27,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   Device: "pc" | "playstation" | "xbox"
   Platform: "blizzard" | "origin" | "steam" | "uplay"
+  Role: "admin" | "customer" | "moderator"
 }
 
 export interface NexusGenScalars {
@@ -27,6 +36,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Date: any
 }
 
 export interface NexusGenRootTypes {
@@ -49,21 +59,25 @@ export interface NexusGenRootTypes {
   }
   Query: {};
   User: { // root type
-    email?: string | null; // String
-    firstName?: string | null; // String
-    id?: number | null; // Int
-    lastName?: string | null; // String
+    createdAt: NexusGenScalars['Date']; // Date!
+    email: string; // String!
+    firstName: string; // String!
+    id: number; // Int!
+    lastName: string; // String!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   Device: NexusGenEnums['Device'];
   Platform: NexusGenEnums['Platform'];
+  Role: NexusGenEnums['Role'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
   Boolean: NexusGenScalars['Boolean'];
   ID: NexusGenScalars['ID'];
+  Date: NexusGenScalars['Date'];
 }
 
 export interface NexusGenFieldTypes {
@@ -90,6 +104,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
     removeFromCart: boolean | null; // Boolean
+    updateRole: boolean | null; // Boolean
   }
   Order: { // field return type
     amount: number; // Float!
@@ -108,10 +123,12 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
-    email: string | null; // String
-    firstName: string | null; // String
-    id: number | null; // Int
-    lastName: string | null; // String
+    createdAt: NexusGenScalars['Date']; // Date!
+    email: string; // String!
+    firstName: string; // String!
+    id: number; // Int!
+    lastName: string; // String!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
@@ -139,6 +156,7 @@ export interface NexusGenFieldTypeNames {
     login: 'User'
     logout: 'Boolean'
     removeFromCart: 'Boolean'
+    updateRole: 'Boolean'
   }
   Order: { // field return type name
     amount: 'Float'
@@ -157,10 +175,12 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   User: { // field return type name
+    createdAt: 'Date'
     email: 'String'
     firstName: 'String'
     id: 'Int'
     lastName: 'String'
+    role: 'Role'
   }
 }
 
@@ -189,6 +209,10 @@ export interface NexusGenArgTypes {
     removeFromCart: { // args
       gameId: string; // ID!
     }
+    updateRole: { // args
+      newRole: NexusGenEnums['Role']; // Role!
+      userID: number; // Int!
+    }
   }
   Query: {
     game: { // args
@@ -212,11 +236,11 @@ export type NexusGenObjectNames = "Cart" | "Game" | "Mutation" | "Order" | "Quer
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = "Device" | "Platform";
+export type NexusGenEnumNames = "Device" | "Platform" | "Role";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Date" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

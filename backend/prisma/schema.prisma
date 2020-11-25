@@ -15,16 +15,18 @@ model games {
   device      device
   platform    platform?
   poster      String?
+  createdAt   DateTime  @default(now())
   keys        keys[]
   orders      orders[]
 }
 
 model keys {
-  id     Int      @id @default(autoincrement())
-  key    String   @unique
-  game   String
-  games  games    @relation(fields: [game], references: [id])
-  orders orders[]
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  game      String
+  createdAt DateTime @default(now())
+  games     games    @relation(fields: [game], references: [id])
+  orders    orders[]
 }
 
 model users {
@@ -34,19 +36,21 @@ model users {
   lastName  String
   password  String
   role      user_role @default(customer)
+  createdAt DateTime  @default(now())
   orders    orders[]
 }
 
 model orders {
-  id            Int    @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   paymentIntent String
   madeBy        Int
   game          String
   amount        Float
   key           Int
-  games         games  @relation(fields: [game], references: [id])
-  keys          keys   @relation(fields: [key], references: [id])
-  users         users  @relation(fields: [madeBy], references: [id])
+  createdAt     DateTime @default(now())
+  games         games    @relation(fields: [game], references: [id])
+  keys          keys     @relation(fields: [key], references: [id])
+  users         users    @relation(fields: [madeBy], references: [id])
 }
 
 model session {

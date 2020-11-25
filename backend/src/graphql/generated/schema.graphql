@@ -9,6 +9,11 @@ type Cart {
   price: Float
 }
 
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
 enum Device {
   pc
   playstation
@@ -33,6 +38,7 @@ type Mutation {
   login(email: String!, password: String!): User
   logout: Boolean
   removeFromCart(gameId: ID!): Boolean
+  updateRole(newRole: Role!, userID: Int!): Boolean
 }
 
 type Order {
@@ -60,9 +66,17 @@ type Query {
   user(id: Int!): User
 }
 
+enum Role {
+  admin
+  customer
+  moderator
+}
+
 type User {
-  email: String
-  firstName: String
-  id: Int
-  lastName: String
+  createdAt: Date!
+  email: String!
+  firstName: String!
+  id: Int!
+  lastName: String!
+  role: Role!
 }
