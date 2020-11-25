@@ -29,3 +29,9 @@ export const Table = styled.table`
     border-radius: 3px;
   }
 `
+
+export const NoOrders = styled.div`
+  font-size: 1.4rem;
+  color: ${colors.lighterBlack};
+  text-align: center;
+`

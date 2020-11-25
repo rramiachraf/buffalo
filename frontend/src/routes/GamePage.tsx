@@ -10,6 +10,7 @@ import { Container, Game, Left, Right, Poster } from '../components/pages/Game'
 
 import { ADD_TO_CART, GET_CART, GET_GAME, REMOVE_FROM_CART } from '../queries'
 import { CartContext } from '../lib/CartContext'
+import { NotFound } from './NotFound'
 
 export const GamePage = () => {
   const { id } = useParams() as { id: string }
@@ -23,7 +24,7 @@ export const GamePage = () => {
   const [addToCart] = useMutation(ADD_TO_CART)
   const [removeFromCart] = useMutation(REMOVE_FROM_CART)
 
-  if (error) return <h1>Error</h1>
+  if (error) return <NotFound />
   if (loading) return <h1>Loading...</h1>
 
   const handleAddToCart = async () => {
