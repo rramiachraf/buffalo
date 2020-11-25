@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model games {
+  id          String    @id
+  name        String
+  description String
+  price       Float
+  device      device
+  platform    platform?
+  poster      String?
+  keys        keys[]
+  orders      orders[]
+}
+
+model keys {
+  id     Int      @id @default(autoincrement())
+  key    String   @unique
+  game   String
+  games  games    @relation(fields: [game], references: [id])
+  orders orders[]
+}
+
+model users {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  firstName String
+  lastName  String
+  password  String
+  role      user_role @default(customer)
+  orders    orders[]
+}
+
+model orders {
+  id            Int    @id @default(autoincrement())
+  paymentIntent String
+  madeBy        Int
+  game          String
+  amount        Float
+  key           Int
+  games         games  @relation(fields: [game], references: [id])
+  keys          keys   @relation(fields: [key], references: [id])
+  users         users  @relation(fields: [madeBy], references: [id])
+}
+
+model session {
+  sid    String   @id
+  sess   Json
+  expire DateTime
+
+  @@index([expire], name: "IDX_session_expire")
+}
+
+enum device {
+  pc
+  playstation
+  xbox
+}
+
+enum platform {
+  steam
+  origin
+  blizzard
+  uplay
+}
+
+enum user_role {
+  customer
+  moderator
+  admin
+}
