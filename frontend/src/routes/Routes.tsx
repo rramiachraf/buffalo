@@ -15,7 +15,7 @@ const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-template-rows: 7rem 1fr;
-  gap: 4rem;
+  gap: 3rem;
 `
 
 export default () => (

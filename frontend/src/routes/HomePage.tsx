@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { HotStuff } from '../components/HotStuff'
+import { BestGames } from '../components/BestGames'
+import { GameOfTheDay } from '../components/GameOfTheDay'
 import { Container } from '../components/pages/Home'
 
 export const HomePage = () => {
   return (
     <Container>
-      <HotStuff />
+      <GameOfTheDay />
+      <BestGames />
     </Container>
   )
 }

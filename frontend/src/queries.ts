@@ -69,6 +69,7 @@ export const LOGGED_USER = gql`
       id
       firstName
       lastName
+      role
     }
   }
 `
@@ -92,6 +93,15 @@ export const GET_ORDERS = gql`
       key
       game
       amount
+    }
+  }
+`
+
+export const GET_GAMES = gql`
+  {
+    games {
+      id
+      poster
     }
   }
 `

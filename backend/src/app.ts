@@ -24,15 +24,7 @@ export const stripe = new Stripe(STRIPE_SECRET, {
 
 export const app = express()
 
-app.use(
-  express.json({
-    type: '*/*',
-    verify(req, res, buf) {
-      //@ts-ignore
-      req.rawBody = buf
-    }
-  })
-)
+app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 

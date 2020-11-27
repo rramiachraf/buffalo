@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { styled } from 'linaria/react'
-import { FaUser, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa'
+import {
+  FaUser,
+  FaShoppingCart,
+  FaSignOutAlt,
+  FaShieldAlt
+} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 
@@ -37,7 +42,7 @@ const OptionsArea = styled.div`
 export const Navbar = () => {
   const [isOpen, setModal] = useState(false)
 
-  const { logged } = useAuth()
+  const { logged, user } = useAuth()
 
   const [logout] = useMutation(LOGOUT)
 
@@ -54,6 +59,13 @@ export const Navbar = () => {
       </Link>
       <SearchBar />
       <OptionsArea>
+        {user.role === 'admin' && (
+          <Link to="/admin">
+            <NavButton>
+              <FaShieldAlt />
+            </NavButton>
+          </Link>
+        )}
         {logged ? (
           <NavButton onClick={handleLogout}>
             <FaSignOutAlt />

@@ -52,9 +52,7 @@ export const updatePoster = route.post(
         Bucket: POSTERS_BUCKET,
         Body: file,
         ContentType: 'image/jpeg',
-        Metadata: {
-          'Cache-Control': 'max-age=31536000'
-        }
+        CacheControl: 'max-age=31536000'
       })
 
       await prisma.games.update({

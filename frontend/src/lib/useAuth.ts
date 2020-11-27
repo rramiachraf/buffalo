@@ -7,7 +7,7 @@ type LoggedState = [Logged, Dispatch<SetStateAction<Logged>>]
 
 export const useAuth = () => {
   const [logged, setLogged] = useState(undefined) as LoggedState
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({}) as any
   const client = useApolloClient()
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const useAuth = () => {
         }
       })
       .catch(e => console.log(e))
-  }, [client, setLogged])
+  }, [client, setLogged, setUser])
 
   return {
     logged,

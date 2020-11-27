@@ -12,7 +12,7 @@ export const total = queryField('total', {
         .map(({ price }) => price)
         .reduce((acc, curr) => acc + curr)
 
-      return total
+      return Number(total.toFixed(2))
     } catch (e) {
       return null
     }
