@@ -30,13 +30,21 @@ type Game {
   price: Float!
 }
 
+type GameOfTheDay {
+  id: ID
+  largePoster: String
+  name: String
+  price: Float
+}
+
 type Mutation {
-  addGame(description: String!, device: Device!, name: String!, platform: Platform, price: Float!): Boolean
+  addGame(description: String!, device: Device!, name: String!, platform: Platform, price: Float!): Game
   addToCart(gameId: ID!): Boolean
   checkout: String
   createUser(email: String!, firstName: String!, lastName: String!, password: String!): User
   login(email: String!, password: String!): User
   logout: Boolean
+  makeGameOfTheDay(gameID: ID!): Boolean
   removeFromCart(gameId: ID!): Boolean
   updateRole(newRole: Role!, userID: Int!): Boolean
 }
@@ -58,12 +66,14 @@ enum Platform {
 type Query {
   cart: [Cart]!
   game(id: ID!): Game
+  gameOfTheDay: GameOfTheDay
   games: [Game]
   getOrders: [Order]
   me: User
   searchGame(query: String!): [Game]
   total: Float
   user(id: Int!): User
+  users: [User]
 }
 
 enum Role {

@@ -50,6 +50,12 @@ export interface NexusGenRootTypes {
     poster?: string | null; // String
     price: number; // Float!
   }
+  GameOfTheDay: { // root type
+    id?: string | null; // ID
+    largePoster?: string | null; // String
+    name?: string | null; // String
+    price?: number | null; // Float
+  }
   Mutation: {};
   Order: { // root type
     amount: number; // Float!
@@ -96,13 +102,20 @@ export interface NexusGenFieldTypes {
     poster: string | null; // String
     price: number; // Float!
   }
+  GameOfTheDay: { // field return type
+    id: string | null; // ID
+    largePoster: string | null; // String
+    name: string | null; // String
+    price: number | null; // Float
+  }
   Mutation: { // field return type
-    addGame: boolean | null; // Boolean
+    addGame: NexusGenRootTypes['Game'] | null; // Game
     addToCart: boolean | null; // Boolean
     checkout: string | null; // String
     createUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
+    makeGameOfTheDay: boolean | null; // Boolean
     removeFromCart: boolean | null; // Boolean
     updateRole: boolean | null; // Boolean
   }
@@ -115,12 +128,14 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     cart: Array<NexusGenRootTypes['Cart'] | null>; // [Cart]!
     game: NexusGenRootTypes['Game'] | null; // Game
+    gameOfTheDay: NexusGenRootTypes['GameOfTheDay'] | null; // GameOfTheDay
     games: Array<NexusGenRootTypes['Game'] | null> | null; // [Game]
     getOrders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
     me: NexusGenRootTypes['User'] | null; // User
     searchGame: Array<NexusGenRootTypes['Game'] | null> | null; // [Game]
     total: number | null; // Float
     user: NexusGenRootTypes['User'] | null; // User
+    users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   User: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
@@ -148,13 +163,20 @@ export interface NexusGenFieldTypeNames {
     poster: 'String'
     price: 'Float'
   }
+  GameOfTheDay: { // field return type name
+    id: 'ID'
+    largePoster: 'String'
+    name: 'String'
+    price: 'Float'
+  }
   Mutation: { // field return type name
-    addGame: 'Boolean'
+    addGame: 'Game'
     addToCart: 'Boolean'
     checkout: 'String'
     createUser: 'User'
     login: 'User'
     logout: 'Boolean'
+    makeGameOfTheDay: 'Boolean'
     removeFromCart: 'Boolean'
     updateRole: 'Boolean'
   }
@@ -167,12 +189,14 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     cart: 'Cart'
     game: 'Game'
+    gameOfTheDay: 'GameOfTheDay'
     games: 'Game'
     getOrders: 'Order'
     me: 'User'
     searchGame: 'Game'
     total: 'Float'
     user: 'User'
+    users: 'User'
   }
   User: { // field return type name
     createdAt: 'Date'
@@ -206,6 +230,9 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
     }
+    makeGameOfTheDay: { // args
+      gameID: string; // ID!
+    }
     removeFromCart: { // args
       gameId: string; // ID!
     }
@@ -232,7 +259,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Cart" | "Game" | "Mutation" | "Order" | "Query" | "User";
+export type NexusGenObjectNames = "Cart" | "Game" | "GameOfTheDay" | "Mutation" | "Order" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 

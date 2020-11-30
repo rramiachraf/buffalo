@@ -105,3 +105,68 @@ export const GET_GAMES = gql`
     }
   }
 `
+
+export const GET_USERS = gql`
+  {
+    users {
+      id
+      firstName
+      lastName
+      email
+      role
+      createdAt
+    }
+  }
+`
+
+export const GET_GAME_OF_THE_DAY = gql`
+  {
+    gameOfTheDay {
+      id
+      name
+      price
+      largePoster
+    }
+  }
+`
+
+export const GET_GAMES_ADMIN = gql`
+  {
+    games {
+      id
+      name
+      price
+      platform
+      device
+    }
+    gameOfTheDay {
+      id
+    }
+  }
+`
+
+export const MAKE_GAME_OF_DAY = gql`
+  mutation makeGameOfTheDayMutation($id: ID!) {
+    makeGameOfTheDay(gameID: $id)
+  }
+`
+
+export const ADD_GAME = gql`
+  mutation addGameMutation(
+    $name: String!
+    $description: String!
+    $price: Float!
+    $device: Device!
+    $platform: Platform
+  ) {
+    addGame(
+      name: $name
+      description: $description
+      price: $price
+      device: $device
+      platform: $platform
+    ) {
+      id
+    }
+  }
+`

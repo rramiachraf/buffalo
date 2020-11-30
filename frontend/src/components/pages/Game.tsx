@@ -1,5 +1,8 @@
 import { styled } from 'linaria/react'
+import { FaFileImage } from 'react-icons/fa'
+
 import { colors } from '../../styles/colors'
+import { Button } from '../Button'
 
 export const Container = styled.div`
   padding: 0 15%;
@@ -31,16 +34,25 @@ export const Poster = styled.div`
     img === null ? colors.lighterGray : `url(${img})`};
   background-size: cover;
   border-radius: 5px;
+  height: 35rem;
 `
 
 export const Left = styled.div`
-  display: grid;
-  grid-template-rows: 35rem 4rem;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  button {
+    height: 4rem;
+  }
 `
 
 export const Right = styled.div`
   display: grid;
   grid-template-rows: auto 5rem 1fr;
   gap: 1.5rem;
+`
+
+export const UpdatePostersIcon = styled(FaFileImage)`
+  color: ${colors.main};
+  font-size: 3rem;
 `

@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import { styled } from 'linaria/react'
 import { Field, Form, Formik } from 'formik'
 import { useMutation } from '@apollo/client'
+import { useHistory } from 'react-router-dom'
 
 import { colors } from '../styles/colors'
 import { Button } from './Button'
@@ -25,7 +26,7 @@ const Input = styled(Field)`
   padding: 0 2rem;
   transition: 0.1s border ease;
   &:focus {
-    border: 1px solid ${colors.lighterBlack};
+    border: 1px solid ${colors.main};
   }
 `
 
@@ -60,6 +61,7 @@ interface LoginModalProps {
 
 export const LoginModal = ({ isOpen, setModal }: LoginModalProps) => {
   const [login] = useMutation(LOGIN)
+  const history = useHistory()
   return (
     <Modal
       isOpen={isOpen}
@@ -72,10 +74,10 @@ export const LoginModal = ({ isOpen, setModal }: LoginModalProps) => {
           backgroundColor: 'rgba(255, 255, 255, 0.9)'
         },
         content: {
-          top: '10rem',
+          top: '15rem',
           left: '45rem',
           right: '45rem',
-          bottom: '10rem',
+          bottom: '15rem',
           borderRadius: '5px',
           border: `1px solid ${colors.lighterGray}`
         }
@@ -101,7 +103,15 @@ export const LoginModal = ({ isOpen, setModal }: LoginModalProps) => {
               Sign In
             </Button>
             <Notice>Don’t have an account?</Notice>
-            <SignUpButton type="button">Sign Up</SignUpButton>
+            <SignUpButton
+              type="button"
+              onClick={() => {
+                setModal(false)
+                history.push('/signup')
+              }}
+            >
+              Sign Up
+            </SignUpButton>
           </Container>
         )}
       </Formik>

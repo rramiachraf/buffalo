@@ -15,7 +15,6 @@ export const useAuth = () => {
       .query({ query: LOGGED_USER })
       .then(({ error, data }) => {
         if (error) {
-          throw new Error(error.message)
         }
 
         if (!data.me) {

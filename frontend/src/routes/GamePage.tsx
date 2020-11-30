@@ -3,16 +3,18 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
 
-import { Button } from '../components/Button'
+import { Button, GreenButton, RedButton } from '../components/Button'
 import { Infos } from '../components/Infos'
-import { RedButton } from '../components/RedButton'
 import { Container, Game, Left, Right, Poster } from '../components/pages/Game'
 
 import { ADD_TO_CART, GET_CART, GET_GAME, REMOVE_FROM_CART } from '../queries'
 import { CartContext } from '../lib/CartContext'
 import { NotFound } from './NotFound'
+import { useAuth } from '../lib/useAuth'
 
 export const GamePage = () => {
+  const { user } = useAuth()
+
   const { id } = useParams() as { id: string }
 
   const cart = useContext(CartContext)
@@ -59,6 +61,9 @@ export const GamePage = () => {
             </RedButton>
           ) : (
             <Button onClick={handleAddToCart}>Add to cart</Button>
+          )}
+          {user.role === 'admin' && poster === 'null' && (
+            <GreenButton>Update Posters</GreenButton>
           )}
         </Left>
 

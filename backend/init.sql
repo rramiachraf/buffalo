@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS games(
     device DEVICE NOT NULL,
     platform PLATFORM,
     poster TEXT,
+    "largePoster" TEXT,
     "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -40,6 +41,11 @@ CREATE TABLE IF NOT EXISTS orders(
     amount NUMERIC NOT NULL,
     key INTEGER NOT NULL REFERENCES keys(id),
     "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS "gameOfTheDay" (
+    id SERIAL PRIMARY KEY NOT NULL,
+    game VARCHAR(25) NOT NULL REFERENCES games(id)
 );
 
 CREATE TABLE IF NOT EXISTS "session" (

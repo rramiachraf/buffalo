@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { DeviceEnum } from './index'
 
 export const addGame = mutationField('addGame', {
-  type: 'Boolean',
+  type: 'Game',
   args: {
     name: stringArg({ required: true }),
     description: stringArg({ required: true }),
@@ -13,12 +13,12 @@ export const addGame = mutationField('addGame', {
   },
   async resolve(_, args, { prisma }) {
     try {
-      await prisma.games.create({
+      const newGame = await prisma.games.create({
         data: { id: nanoid(), ...args, poster: 'null' }
       })
-      return true
+      return newGame
     } catch (e) {
-      return false
+      return null
     }
   }
 })

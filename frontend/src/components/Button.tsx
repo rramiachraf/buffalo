@@ -21,3 +21,19 @@ export const Button = styled.button`
     opacity: 0.75;
   }
 `
+
+export const RedButton = styled(Button)`
+  background: ${colors.red};
+  &:hover,
+  &:active {
+    background: ${darken(0.1, colors.red)};
+  }
+`
+
+export const GreenButton = styled(Button)`
+  background: ${colors.green};
+  &:hover,
+  &:active {
+    background: ${darken(0.1, colors.green)};
+  }
+`

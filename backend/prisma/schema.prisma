@@ -8,16 +8,18 @@ datasource db {
 }
 
 model games {
-  id          String    @id
-  name        String
-  description String
-  price       Float
-  device      device
-  platform    platform?
-  poster      String?
-  createdAt   DateTime  @default(now())
-  keys        keys[]
-  orders      orders[]
+  id           String         @id
+  name         String
+  description  String
+  price        Float
+  device       device
+  platform     platform?
+  poster       String?
+  createdAt    DateTime       @default(now())
+  largePoster  String?
+  gameOfTheDay gameOfTheDay[]
+  keys         keys[]
+  orders       orders[]
 }
 
 model keys {
@@ -59,6 +61,12 @@ model session {
   expire DateTime
 
   @@index([expire], name: "IDX_session_expire")
+}
+
+model gameOfTheDay {
+  id    Int    @id @default(autoincrement())
+  game  String
+  games games  @relation(fields: [game], references: [id])
 }
 
 enum device {

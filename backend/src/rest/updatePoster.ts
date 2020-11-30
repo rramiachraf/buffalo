@@ -28,7 +28,10 @@ const upload = multer({})
 
 export const updatePoster = route.post(
   '/update_poster/:gameId',
-  upload.single('poster'),
+  upload.fields([
+    { name: 'poster', maxCount: 1 },
+    { name: 'largePoster', maxCount: 1 }
+  ]),
   async (req, res) => {
     try {
       const game = await prisma.games.findOne({
@@ -42,27 +45,50 @@ export const updatePoster = route.post(
         throw new Error('')
       }
 
-      const file = await sharp(req.file.buffer)
+      const posterFile = (req.files as any)['poster'][0].buffer
+      const largePosterFile = (req.files as any)['largePoster'][0].buffer
+
+      const poster = await sharp(posterFile)
         .resize({ width: 260, height: 350 })
-        .toFormat('jpeg')
+        .jpeg()
         .toBuffer()
 
-      const { Location } = await uploadToAWS({
+      const { Location: posterLocation } = await uploadToAWS({
         Key: game.id,
         Bucket: POSTERS_BUCKET,
-        Body: file,
+        Body: poster,
         ContentType: 'image/jpeg',
         CacheControl: 'max-age=31536000'
       })
 
-      await prisma.games.update({
-        where: { id: req.params.gameId },
-        data: { poster: Location }
-      })
+      if (largePosterFile) {
+        const largePoster = await sharp(largePosterFile)
+          .resize(950)
+          .jpeg()
+          .toBuffer()
+
+        const { Location: largePosterLocation } = await uploadToAWS({
+          Key: game.id + '-large',
+          Bucket: POSTERS_BUCKET,
+          Body: largePoster,
+          ContentType: 'image/jpeg',
+          CacheControl: 'max-age=31536000'
+        })
+
+        await prisma.games.update({
+          where: { id: req.params.gameId },
+          data: { poster: posterLocation, largePoster: largePosterLocation }
+        })
+      } else {
+        await prisma.games.update({
+          where: { id: req.params.gameId },
+          data: { poster: posterLocation }
+        })
+      }
 
       res.send()
     } catch (e) {
-      res.status(500).send()
+      res.status(400).send()
     }
   }
 )

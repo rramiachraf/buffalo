@@ -22,7 +22,8 @@ export const permissions = shield({
   Query: {
     me: isAuthenticated,
     user: isAuthenticated,
-    getOrders: isAuthenticated
+    getOrders: isAuthenticated,
+    users: isAdmin
   },
   Mutation: {
     logout: isAuthenticated,
@@ -30,6 +31,7 @@ export const permissions = shield({
     addGame: or(isAdmin, isModerator),
     createUser: not(isAuthenticated),
     login: not(isAuthenticated),
-    updateRole: isAdmin
+    updateRole: isAdmin,
+    makeGameOfTheDay: or(isAdmin, isModerator)
   }
 })

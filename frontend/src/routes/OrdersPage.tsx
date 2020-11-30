@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/client'
 import React from 'react'
 
 import { GET_ORDERS } from '../queries'
-import { Container, NoOrders, Table } from '../components/pages/Orders'
+import { Container, NoOrders } from '../components/pages/Orders'
+import { Table } from '../components/Table'
 import { KeyCell } from '../components/KeyCell'
 
 export const OrdersPage = () => {

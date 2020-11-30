@@ -2,6 +2,9 @@ import React from 'react'
 import { styled } from 'linaria/react'
 import { rgba } from 'polished'
 import { colors } from '../styles/colors'
+import { useQuery } from '@apollo/client'
+import { GET_GAME_OF_THE_DAY } from '../queries'
+import { useHistory } from 'react-router-dom'
 
 interface ContainerProps {
   img: string
@@ -15,6 +18,10 @@ const Container = styled.div`
   cursor: pointer;
   display: grid;
   grid-template-rows: 1fr 6rem;
+  transition: 0.3s filter ease;
+  &:hover {
+    filter: grayscale(0.4);
+  }
 `
 
 const InfosArea = styled.div`
@@ -40,14 +47,21 @@ const Price = styled.span`
   font-weight: 500;
 `
 
-export const GameOfTheDay = () => (
-  <Container img="https://i.imgur.com/tL7d0Um.jpg">
-    <div></div>
-    <InfosArea>
-      <Title>
-        PLAYERUNKNOWN'S BATTLEGROUNDS (PUBG) (PC) - Steam Key - GLOBAL
-      </Title>
-      <Price>35.82 USD</Price>
-    </InfosArea>
-  </Container>
-)
+export const GameOfTheDay = () => {
+  const { data, loading } = useQuery(GET_GAME_OF_THE_DAY)
+  const history = useHistory()
+
+  if (loading) return <h1>Loading...</h1>
+
+  const { id, name, price, largePoster } = data.gameOfTheDay
+
+  return (
+    <Container img={largePoster} onClick={() => history.push(`/game/${id}`)}>
+      <div></div>
+      <InfosArea>
+        <Title>{name}</Title>
+        <Price>{price} USD</Price>
+      </InfosArea>
+    </Container>
+  )
+}

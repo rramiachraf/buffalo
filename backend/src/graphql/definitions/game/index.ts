@@ -38,7 +38,19 @@ export const Game = objectType({
   }
 })
 
+export const GameOfTheDay = objectType({
+  name: 'GameOfTheDay',
+  definition(t){
+    t.id('id')
+    t.string('name')
+    t.float('price')
+    t.string('largePoster')
+  }
+})
+
 export { addGame } from './addGame'
 export { game } from './game'
 export { games } from './games'
 export { searchGame } from './searchGame'
+export { makeGameOfTheDay } from './makeGameOfTheDay'
+export { gameOfTheDay } from './gameOfTheDay'

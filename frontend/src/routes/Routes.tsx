@@ -10,6 +10,10 @@ import { CartPage } from './CartPage'
 import { CheckoutPage } from './CheckoutPage'
 import { PrivateRoute } from './PrivateRoute'
 import { OrdersPage } from './OrdersPage'
+import { AdminRoute } from './AdminRoute'
+import { UsersPage } from './Admin/UsersPage'
+import { GamesPage } from './Admin/GamesPage'
+import { AddGamePage } from './Admin/AddGamePage'
 
 const Container = styled.div`
   min-height: 100vh;
@@ -26,8 +30,13 @@ export default () => (
         <Route path="/" component={HomePage} exact={true} />
         <Route path="/game/:id" component={GamePage} />
         <Route path="/cart" component={CartPage} />
+
         <PrivateRoute path="/checkout" component={CheckoutPage} />
         <PrivateRoute path="/orders" component={OrdersPage} />
+
+        <AdminRoute path="/admin/users" component={UsersPage} />
+        <AdminRoute path="/admin/games" component={GamesPage} />
+        <AdminRoute path="/admin/addGame" component={AddGamePage} />
       </Switch>
     </Container>
   </BrowserRouter>
