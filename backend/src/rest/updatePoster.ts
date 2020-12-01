@@ -6,6 +6,7 @@ import sharp from 'sharp'
 
 import { AWS_ACCESS, AWS_SECRET, POSTERS_BUCKET } from '../settings/env'
 import { prisma } from '../app'
+import { isAdmin } from './middlewares'
 
 const route = Router()
 
@@ -27,7 +28,8 @@ const uploadToAWS = (objectRequest: PutObjectRequest) => {
 const upload = multer({})
 
 export const updatePoster = route.post(
-  '/update_poster/:gameId',
+  '/update_posters/:gameId',
+  isAdmin,
   upload.fields([
     { name: 'poster', maxCount: 1 },
     { name: 'largePoster', maxCount: 1 }

@@ -11,6 +11,7 @@ import { ADD_TO_CART, GET_CART, GET_GAME, REMOVE_FROM_CART } from '../queries'
 import { CartContext } from '../lib/CartContext'
 import { NotFound } from './NotFound'
 import { useAuth } from '../lib/useAuth'
+import { UpdatePosterModal } from '../components/UpdatePostersModal'
 
 export const GamePage = () => {
   const { user } = useAuth()
@@ -63,7 +64,10 @@ export const GamePage = () => {
             <Button onClick={handleAddToCart}>Add to cart</Button>
           )}
           {user.role === 'admin' && poster === 'null' && (
-            <GreenButton>Update Posters</GreenButton>
+            <>
+              <GreenButton>Update Posters</GreenButton>
+              <UpdatePosterModal />
+            </>
           )}
         </Left>
 

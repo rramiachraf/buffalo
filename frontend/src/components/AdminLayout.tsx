@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from 'linaria/react'
 import { colors } from '../styles/colors'
 import { darken } from 'polished'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Container = styled.div`
   padding: 0 15%;
@@ -20,11 +20,12 @@ const Navigation = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-bottom: 5px solid ${darken(0.1, colors.main)};
   li {
     color: white;
     font-size: 1.4rem;
     text-transform: uppercase;
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     cursor: pointer;
     border-radius: 3px;
     transition: 0.3s background;
@@ -39,16 +40,28 @@ export const AdminLayout: React.FC<{ children: React.ReactElement }> = ({
 }) => (
   <Container>
     <Navigation>
-      <Link to="/admin/users">
-        <li>Users</li>
-      </Link>
-      <Link to="/admin/games">
-        <li>Games</li>
-      </Link>
-      <Link to="/admin/addGame">
-        <li>Add new game</li>
-      </Link>
+      <Link to="/admin/users" display="Users" />
+      <Link to="/admin/games" display="Games" />
+      <Link to="/admin/addGame" display="Add new game" />
     </Navigation>
     {children}
   </Container>
 )
+
+interface NavigationLinkProps {
+  to: string
+  display: string
+}
+
+const Link = ({ to, display }: NavigationLinkProps) => {
+  const activeStyles: React.CSSProperties = {
+    background: darken(0.15, colors.main),
+    borderRadius: '3px',
+    fontWeight: 500
+  }
+  return (
+    <NavLink to={to} activeStyle={activeStyles}>
+      <li>{display}</li>
+    </NavLink>
+  )
+}

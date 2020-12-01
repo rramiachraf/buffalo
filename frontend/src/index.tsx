@@ -9,7 +9,7 @@ import Routes from './routes/Routes'
 import { CartProvider } from './lib/CartContext'
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_API_URL,
+  uri: process.env.REACT_APP_API_URL + '/api',
   cache: new InMemoryCache(),
   credentials: 'include'
 })

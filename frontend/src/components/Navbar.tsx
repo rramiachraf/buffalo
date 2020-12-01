@@ -60,7 +60,7 @@ export const Navbar = () => {
       <SearchBar />
       <OptionsArea>
         {user.role === 'admin' && (
-          <Link to="/admin">
+          <Link to="/admin/games">
             <NavButton>
               <FaShieldAlt />
             </NavButton>

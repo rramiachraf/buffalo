@@ -5,6 +5,7 @@ import session from 'express-session'
 import Stripe from 'stripe'
 import pgSession from 'connect-pg-simple'
 import { applyMiddleware } from 'graphql-middleware'
+import cors from 'cors'
 
 import { schema } from './graphql/schema'
 import { CORS, SESSION_SECRET, STRIPE_SECRET } from './settings/env'
@@ -27,6 +28,8 @@ export const app = express()
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cors({ origin: CORS, credentials: true }))
 
 app.use(
   session({

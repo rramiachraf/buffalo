@@ -35,6 +35,7 @@ export const Poster = styled.div`
   background-size: cover;
   border-radius: 5px;
   height: 35rem;
+  border: 1px solid ${colors.lighterGray};
 `
 
 export const Left = styled.div`
