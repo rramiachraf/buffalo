@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
 
-import { Button, GreenButton, RedButton } from '../components/Button'
+import { Button, RedButton } from '../components/Button'
 import { Infos } from '../components/Infos'
 import { Container, Game, Left, Right, Poster } from '../components/pages/Game'
 
@@ -63,12 +63,7 @@ export const GamePage = () => {
           ) : (
             <Button onClick={handleAddToCart}>Add to cart</Button>
           )}
-          {user.role === 'admin' && poster === 'null' && (
-            <>
-              <GreenButton>Update Posters</GreenButton>
-              <UpdatePosterModal />
-            </>
-          )}
+          {user.role === 'admin' && poster === 'null' && <UpdatePosterModal />}
         </Left>
 
         <Right>

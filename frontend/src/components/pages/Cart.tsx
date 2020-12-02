@@ -37,9 +37,11 @@ export const CartItems = styled.ul`
       color: ${colors.lightBlack};
       font-size: 1.8rem;
     }
-    span {
+    div {
       font-size: 1.5rem;
       color: ${colors.lighterBlack};
+      display: flex;
+      gap: 1rem;
       sup {
         font-size: 1rem;
         font-weight: 700;
@@ -48,6 +50,11 @@ export const CartItems = styled.ul`
     img {
       width: 100%;
       border-radius: 3px;
+    }
+    svg {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: ${colors.red};
     }
   }
 `

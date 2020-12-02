@@ -46,6 +46,7 @@ export const UpdatePosterModal = () => {
 
   const [poster, setPoster] = useState({}) as fileState
   const [largePoster, setLargePoster] = useState({}) as fileState
+  const [submitting, setSubmitting] = useState(false)
 
   const accept = '.jpeg, .jpg, .png'
 
@@ -58,6 +59,7 @@ export const UpdatePosterModal = () => {
   }
 
   const handleSubmission = async () => {
+    setSubmitting(true)
     const body = new FormData()
     body.append('poster', poster)
     body.append('largePoster', largePoster)
@@ -73,7 +75,10 @@ export const UpdatePosterModal = () => {
     try {
       await fetch(request)
       document.location.reload()
-    } catch (e) {}
+      setSubmitting(false)
+    } catch (e) {
+      setSubmitting(false)
+    }
   }
 
   const modalContentStyles: React.CSSProperties = {
@@ -110,8 +115,8 @@ export const UpdatePosterModal = () => {
             {largePoster.name ? largePoster.name : 'Choose large poster'}
           </GreenButton>
         </div>
-        <Button type="submit" onClick={handleSubmission}>
-          Upload
+        <Button disabled={submitting} type="submit" onClick={handleSubmission}>
+          {submitting ? 'Uploading...' : 'Upload'}
         </Button>
       </Container>
     </Modal>

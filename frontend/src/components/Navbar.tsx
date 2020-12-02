@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { styled } from 'linaria/react'
 import {
   FaUser,
@@ -15,6 +15,7 @@ import { LOGOUT } from '../queries'
 import { NavButton } from './NavButton'
 import { useAuth } from '../lib/useAuth'
 import { SearchBar } from './navbar/SearchBar'
+import { CartContext } from '../lib/CartContext'
 
 const Container = styled.nav`
   background: white;
@@ -40,6 +41,8 @@ const OptionsArea = styled.div`
 `
 
 export const Navbar = () => {
+  const cart = useContext(CartContext)
+
   const [isOpen, setModal] = useState(false)
 
   const { logged, user } = useAuth()
@@ -76,7 +79,7 @@ export const Navbar = () => {
           </NavButton>
         )}
         <Link to="/cart">
-          <NavButton>
+          <NavButton items={cart.length}>
             <FaShoppingCart />
           </NavButton>
         </Link>
