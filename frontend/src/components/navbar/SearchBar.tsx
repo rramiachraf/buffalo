@@ -59,6 +59,7 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  z-index: 300;
 `
 
 export const SearchBar = () => {
@@ -88,6 +89,7 @@ export const SearchBar = () => {
         onChange={({ target }) => setSearch(target.value)}
         type="text"
         placeholder="Search for games"
+        onKeyUp={(e) => e.key === 'Enter' && handleSearchGame()}
       />
       <Button onClick={handleSearchGame}>
         <SearchIcon />

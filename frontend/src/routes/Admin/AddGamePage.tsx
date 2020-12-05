@@ -35,8 +35,8 @@ const initialValues = {
 }
 
 export const AddGamePage = () => {
-  const [device, setDevice] = useState('')
-  const [platform, setPlatform] = useState('')
+  const [device, setDevice] = useState(null)
+  const [platform, setPlatform] = useState(null)
 
   const history = useHistory()
 
@@ -44,6 +44,9 @@ export const AddGamePage = () => {
 
   const handleDeviceChange = (e: any) => {
     setDevice(e.value)
+    if(e.value === "playstation" || "xbox"){
+      setPlatform(null)
+    }
   }
 
   const handlePlatformChange = (e: any) => {

@@ -28,8 +28,8 @@ export const GamesPage = () => {
           <tr>
             <th>Game</th>
             <th>Price</th>
-            <th>Platform</th>
             <th>Device</th>
+            <th>Platform</th>
             <th>Options</th>
           </tr>
         </thead>
@@ -43,8 +43,8 @@ export const GamesPage = () => {
                 {name}
               </td>
               <td>{price} USD</td>
-              <td>{platform}</td>
               <td>{device}</td>
+              <td>{platform}</td>
               <td>
                 {data.gameOfTheDay.id !== id && (
                   <MakeGameOfTheDay

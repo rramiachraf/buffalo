@@ -14,11 +14,12 @@ import { AdminRoute } from './AdminRoute'
 import { UsersPage } from './Admin/UsersPage'
 import { GamesPage } from './Admin/GamesPage'
 import { AddGamePage } from './Admin/AddGamePage'
+import { Footer } from '../components/Footer'
 
 const Container = styled.div`
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 7rem 1fr;
+  grid-template-rows: 7rem 1fr 5rem;
   gap: 3rem;
 `
 
@@ -38,6 +39,7 @@ export default () => (
         <AdminRoute path="/admin/games" component={GamesPage} />
         <AdminRoute path="/admin/addGame" component={AddGamePage} />
       </Switch>
+      <Footer />
     </Container>
   </BrowserRouter>
 )

@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const Games = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
 `
 
@@ -30,12 +30,16 @@ interface GamePreviewProps {
 
 const GamePreview = styled.div`
   border-radius: 3px;
-  height: 30rem;
+  height: 24rem;
   background: ${({ img }: GamePreviewProps) =>
     img ? `url('${img}')` : colors.lighterGray};
   box-shadow: 0 1px 1px ${colors.lighterBlack};
   cursor: pointer;
   background-size: cover;
+  transition: 0.3s filter ease;
+  &:hover {
+    filter: grayscale(0.4);
+  }
 `
 
 export const BestGames = () => {
