@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: frontend
+    restart: always
+    build: ./frontend
+    env_file: frontend.env
+    ports:
+      - 5000:5000
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    restart: always
+    build: ./backend
+    env_file: backend.env
+    environment:
+      PGHOST: postgres
+      PGUSER: user
+      PGDATABASE: buffalo
+      PGPASSWORD: 123456
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: user
+      POSTGRES_DB: buffalo
+    volumes:
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
