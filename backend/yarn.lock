@@ -5784,6 +5784,13 @@ ts-node@^9.0.0:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
+tsc-transpile-only@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tsc-transpile-only/-/tsc-transpile-only-0.0.3.tgz#868ec1749f425cdc8a7b61b8383560c92eda9a3f"
+  integrity sha512-1/QyCEBZZCcopcJGEnP47PpD4/KhG/VHDIv0VfJjJ1kXS4RNDqMGbjd4nIIsql6nPOvvT5dopaMKqp4eOGhoZg==
+  dependencies:
+    tslib "^1.9.3"
+
 tsconfig@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/tsconfig/-/tsconfig-7.0.0.tgz#84538875a4dc216e5c4a5432b3a4dec3d54e91b7"
