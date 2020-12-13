@@ -48,19 +48,22 @@ const Price = styled.span`
 `
 
 export const GameOfTheDay = () => {
-  const { data, loading } = useQuery(GET_GAME_OF_THE_DAY)
+  const { data, loading, error } = useQuery(GET_GAME_OF_THE_DAY)
   const history = useHistory()
 
   if (loading) return <h1>Loading...</h1>
 
-  const { id, name, price, largePoster } = data.gameOfTheDay
+  if (data.gameOfTheDay === null || error) return <></>
 
   return (
-    <Container img={largePoster} onClick={() => history.push(`/game/${id}`)}>
+    <Container
+      img={data.gameOfTheDay.largePoster}
+      onClick={() => history.push(`/game/${data.gameOfTheDay.id}`)}
+    >
       <div></div>
       <InfosArea>
-        <Title>{name}</Title>
-        <Price>{price} USD</Price>
+        <Title>{data.gameOfTheDay.name}</Title>
+        <Price>{data.gameOfTheDay.price} USD</Price>
       </InfosArea>
     </Container>
   )

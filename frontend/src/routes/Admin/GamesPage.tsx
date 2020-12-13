@@ -46,10 +46,12 @@ export const GamesPage = () => {
               <td>{device}</td>
               <td>{platform}</td>
               <td>
-                {data.gameOfTheDay.id !== id && (
+                {!data.gameOfTheDay || data.gameOfTheDay.id !== id ? (
                   <MakeGameOfTheDay
                     onClick={() => handleMakeGameOfTheDay(id)}
                   />
+                ) : (
+                  <></>
                 )}
               </td>
             </tr>

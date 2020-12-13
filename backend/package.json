@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --transpile-only src/server.ts",
     "build": "tsc-transpile-only",
     "test": "jest",
-    "start": "node ./build/server.js"
+    "start": "node build/server.js",
+    "init": "node build/settings/init.js"
   },
   "dependencies": {
     "@nexus/schema": "^0.17.0",

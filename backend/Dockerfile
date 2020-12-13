@@ -9,10 +9,12 @@ RUN yarn install
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN yarn build
 
-ENV PORT 5000
+ENV PORT 4000
 
-EXPOSE 5000
+EXPOSE 4000
 
 CMD [ "yarn", "start" ]
