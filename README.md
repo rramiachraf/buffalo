@@ -1,6 +1,12 @@
 # Buffalo
 Online marketplace where you can buy your favorite games keys.
 
+## Requirements
+- Valid Stripe account
+- Valid AWS account
+- PostgreSQL database
+- NodeJS & Yarn
+
 ## Stack
 The whole project was built using TypeScript.
 ### Frontend
@@ -17,11 +23,5 @@ The whole project was built using TypeScript.
 - Prisma
 - Sharp
 - Stripe SDK
-
-## Requirements
-- Valid Stripe account
-- Valid AWS account
-- PostgreSQL database
-- NodeJS & Yarn
 
 ## Running
