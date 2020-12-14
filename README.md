@@ -9,19 +9,14 @@ Online marketplace where you can buy your favorite games keys.
 
 ## Stack
 The whole project was built using TypeScript.
-### Frontend
-- React
-- Linaria
-- Apollo Client 
-- Stripe Elements
-
-### Backend
-- PostgreSQL
-- Apollo Server
-- GraphQL Nexus
-- AWS S3
-- Prisma
-- Sharp
-- Stripe SDK
+| Frontend | Backend |
+| --- | ----------- |
+| React | PostgreSQL |
+| Linaria | Apollo Server |
+| Apollo Client | GraphQL Nexus |
+|| AWS S3 |
+|| Prisma |
+|| Sharp |
+|| Stripe SDK |
 
 ## Running
